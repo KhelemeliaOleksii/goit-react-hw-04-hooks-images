@@ -1,11 +1,8 @@
-import { Component } from "react";
+import { RotatingLines } from "react-loader-spinner";
 
-export default class Loader extends Component {
-    render() {
-        return (
-            <div>
-                Let's spin!
-            </div>
-        )
-    }
+const Loader = () => {
+    return (
+        <RotatingLines width="100" />
+    )
 }
+export default Loader;
