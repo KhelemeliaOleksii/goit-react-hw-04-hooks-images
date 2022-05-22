@@ -15,4 +15,5 @@ export default ImageGalleryItem;
 ImageGalleryItem.propTypes = {
     previewImageURL: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 }
