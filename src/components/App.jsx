@@ -22,6 +22,7 @@ export const App = () => {
   const [error, setError] = useState(null);
   const [isLoadMoreActive, setIsLoadMoreActive] = useState(false);
   useEffect(() => {
+    console.log("test");
     fetchData(searchValue, page);
 
     // setError(false);
@@ -53,10 +54,12 @@ export const App = () => {
         setLoading(false);
       }
     }
+    /* function gallaryRender
+    in: - hits - array oа request result 
+    do: - set created(updated) state of gallary items*/
     function gallaryRender(hits) {
       setGallaryList((prev) => [...prev, ...mapper(hits)]);
     }
-
     /*  function loadMoreButtonSwitcher
       in: total - total amount,
           page - page number
@@ -74,23 +77,38 @@ export const App = () => {
     }
     /* function isSerchResultEmpty
       in: total - total amount 
+      do: - set state "status" as "idle"
+          do not render : <> gallary 
+                          <> button "Load more"
      */
     function isSerchResultEmpty(total) {
       if (total === 0) {
         setStatus('idle');
-        // setIsLoadMoreActive(false);
         console.log('List of search result is empty');
         return true;
       }
       return false;
     }
+    /*function isRemainingItem
+    in: - total - total searched amount of items;
+        - page - amount of pages;
+        - perPage - amount items per page
+    do: check is remaining items to next request
+      */
     function isRemainingItem(total, page, perPage) {
+      //test: "qwerty"
       const showedItem = page * perPage;
       if (total <= showedItem) {
         return false;
       }
       return true;
     }
+    /*function isSearchValueEmpty
+    in: - search value
+    do: - check is search value
+    out:  - true - if empty
+                - set state "status" as "idle" 
+          - false  else  */
     function isSearchValueEmpty(searchValue) {
       if (searchValue.trim() === '') {
         setStatus('idle');
@@ -103,10 +121,14 @@ export const App = () => {
 
 
   const onSubmit = (value) => {
-    setSearchValue(value);
-    setError(null);
-    setPage(1);
-    setGallaryList([]);
+    if (searchValue !== value) {
+      setSearchValue(value);
+      setError(null);
+      setPage(1);
+      setGallaryList([]);
+      return;
+    }
+
   }
   const onLoadMoreClick = () => {
     setPage(prev => prev + 1);
@@ -129,7 +151,6 @@ export const App = () => {
       {(status === "resolved") &&
         <>
           <ImageGallery gallaryList={gallaryList} showPoster={showGallaryItem} />
-
           {isLoadMoreActive && <Button onClick={onLoadMoreClick} />}
         </>
       }
