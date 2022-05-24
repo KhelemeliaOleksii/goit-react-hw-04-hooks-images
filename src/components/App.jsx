@@ -25,8 +25,6 @@ export const App = () => {
     console.log("test");
     fetchData(searchValue, page);
 
-    // setError(false);
-
     function fetchData(searchValue, page) {
       if (isSearchValueEmpty(searchValue)) {
         return;
@@ -144,7 +142,6 @@ export const App = () => {
   const resetShowItem = () => {
     setShowItem(null);
   }
-  // const { gallaryList, loading, status, showItem } = this.state;
   return (
     <div className={styles.App}>
       <Searchbar onSubmit={onSubmit} />

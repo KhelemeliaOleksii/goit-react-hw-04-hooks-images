@@ -28,5 +28,6 @@ ImageGallery.propTypes = {
             largeImageURL: PropTypes.string.isRequired,
             tags: PropTypes.string.isRequired,
         }).isRequired
-    ).isRequired
+    ).isRequired,
+    showPoster: PropTypes.func.isRequired,
 }
