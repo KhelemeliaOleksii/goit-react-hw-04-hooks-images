@@ -1,12 +1,11 @@
 // import axios from "axios"
 export const http = {
-    get(url, errorMessage) {
-        return fetch(url).then(response => {
-            if (!response.ok) {
-                return Promise.reject(new Error(errorMessage));
-            }
-            return response.json();
-        })
+    async get(url, errorMessage) {
+        const response = await fetch(url);
+        if (!response.ok) {
+            return Promise.reject(new Error(errorMessage));
+        }
+        return response.json();
     },
     /*  get(url) {
          return axios.get(url);
